@@ -1,0 +1,10 @@
+.DS_Store
+bin-debug/*
+bin-release/*
+libs/modules/*
+/manifest.json
+publish/node_modules
+publish/.user.config.json
+.vscode/
+experiment/
+node_modules
