@@ -62,5 +62,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let clickToShowShape = new ButtonControl(ClickToShowShape, 10);
         clickToShowShape.init();
+
+        let debugDrawTest = new ButtonControl(DebugDrawTest, 50);
+        debugDrawTest.init();
     }
 }

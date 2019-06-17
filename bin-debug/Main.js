@@ -125,6 +125,8 @@ var Main = (function (_super) {
         Global.stage = this.stage;
         var clickToShowShape = new ButtonControl(ClickToShowShape, 10);
         clickToShowShape.init();
+        var debugDrawTest = new ButtonControl(DebugDrawTest, 50);
+        debugDrawTest.init();
     };
     return Main;
 }(egret.DisplayObjectContainer));

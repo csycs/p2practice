@@ -7,6 +7,7 @@ class ClickToShowShape extends BaseClass {
         this.createWorld();
         this.createPlane();
         this.createOriBox();
+
         //执行step函数
         Global.main.addEventListener(egret.Event.ENTER_FRAME, this.update, this);
         //舞台添加点击事件，点击出现物体
@@ -29,7 +30,7 @@ class ClickToShowShape extends BaseClass {
             //刚体类型
             type: p2.Body.STATIC,
             //刚体位置
-            position: [0, Global.stage.stageHeight]
+            position: [0, Global.stage.stageHeight * 0.9]
         });
         //egret的坐标轴与p2的坐标轴相反，所以把地面反转180度
         this.planeBody.angle = Math.PI;

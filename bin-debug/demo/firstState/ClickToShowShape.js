@@ -37,7 +37,7 @@ var ClickToShowShape = (function (_super) {
             //刚体类型
             type: p2.Body.STATIC,
             //刚体位置
-            position: [0, Global.stage.stageHeight]
+            position: [0, Global.stage.stageHeight * 0.9]
         });
         //egret的坐标轴与p2的坐标轴相反，所以把地面反转180度
         this.planeBody.angle = Math.PI;
