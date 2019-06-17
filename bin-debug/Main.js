@@ -123,9 +123,9 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         Global.main = this;
         Global.stage = this.stage;
-        var clickToShowShape = new ButtonControl(ClickToShowShape, 10);
+        var clickToShowShape = new ButtonControl(ClickToShowShape, 10, "点击屏幕出现物体");
         clickToShowShape.init();
-        var debugDrawTest = new ButtonControl(DebugDrawTest, 50);
+        var debugDrawTest = new ButtonControl(DebugDrawTest, 50, "DebugDraw的用法");
         debugDrawTest.init();
     };
     return Main;

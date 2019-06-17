@@ -60,10 +60,10 @@ class Main extends egret.DisplayObjectContainer {
         Global.main = this;
         Global.stage = this.stage;
 
-        let clickToShowShape = new ButtonControl(ClickToShowShape, 10);
+        let clickToShowShape = new ButtonControl(ClickToShowShape, 10, "点击屏幕出现物体");
         clickToShowShape.init();
 
-        let debugDrawTest = new ButtonControl(DebugDrawTest, 50);
+        let debugDrawTest = new ButtonControl(DebugDrawTest, 50, "DebugDraw的用法");
         debugDrawTest.init();
     }
 }
