@@ -65,5 +65,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let debugDrawTest = new ButtonControl(DebugDrawTest, 50, "DebugDraw的用法");
         debugDrawTest.init();
+
+        let lineBody = new ButtonControl(LineBody, 90, "线型刚体示例");
+        lineBody.init();
     }
 }

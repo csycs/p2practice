@@ -10,15 +10,16 @@
 	],
 	"game": [
 		"bin-debug/base/BaseClass.js",
-		"bin-debug/control/ButtonControl.js",
+		"bin-debug/control/EngineControl.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/Global.js",
+		"bin-debug/control/ButtonControl.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/control/EngineControl.js",
 		"bin-debug/debug/p2DebugDraw.js",
-		"bin-debug/debug/p2DebugDrawFromGithub.js",
+		"bin-debug/debug/simpleP2DebugDraw.js",
 		"bin-debug/demo/firstState/ClickToShowShape.js",
-		"bin-debug/demo/p2demo/DebugDrawTest.js"
+		"bin-debug/demo/p2demo/DebugDrawTest.js",
+		"bin-debug/demo/p2demo/LineBody.js"
 	]
 }

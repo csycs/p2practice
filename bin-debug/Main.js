@@ -127,6 +127,8 @@ var Main = (function (_super) {
         clickToShowShape.init();
         var debugDrawTest = new ButtonControl(DebugDrawTest, 50, "DebugDraw的用法");
         debugDrawTest.init();
+        var lineBody = new ButtonControl(LineBody, 90, "线型刚体示例");
+        lineBody.init();
     };
     return Main;
 }(egret.DisplayObjectContainer));
