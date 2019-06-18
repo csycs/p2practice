@@ -30,6 +30,8 @@ class LineBody extends BaseClass {
         this._planeBody.angle = Math.PI;
         let planeDisplay = EngineControl.getInstance().drawPlane(0x3500ff, Global.stage.stageWidth, 30);
         this._planeBody.displays = [planeDisplay];
+        planeDisplay.x = this._planeBody.position[0];
+        planeDisplay.y = this._planeBody.position[1];
         Global.main.addChild(planeDisplay);
 
         this._planeBody.addShape(planeShape);
@@ -48,6 +50,8 @@ class LineBody extends BaseClass {
 
         let boxDisplay = EngineControl.getInstance().createBitmapByName("rect_png");
         this._boxBody.displays = [boxDisplay];
+        boxDisplay.x = this._boxBody.position[0];
+        boxDisplay.y = this._boxBody.position[1];
         boxDisplay.width = (<p2.Box>boxShape).width;
         boxDisplay.height = (<p2.Box>boxShape).height;
         boxDisplay.anchorOffsetX = boxDisplay.width / 2;
@@ -71,6 +75,8 @@ class LineBody extends BaseClass {
 
         let lineDisplay = this.drawLine(aPoint, bPoint);
         this._lineBody.displays = [lineDisplay];
+        lineDisplay.x = this._lineBody.position[0];
+        lineDisplay.y = this._lineBody.position[1];
         lineDisplay.anchorOffsetX = lineDisplay.width / 2;
         lineDisplay.anchorOffsetY = lineDisplay.height / 2;
         Global.main.addChild(lineDisplay);

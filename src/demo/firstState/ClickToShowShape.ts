@@ -61,6 +61,9 @@ class ClickToShowShape extends BaseClass {
         //设置贴图宽高与刚体形状一致
         oriBoxDisplay.width = (<p2.Box>oriBoxShape).width;
         oriBoxDisplay.height = (<p2.Box>oriBoxShape).height;
+        //位置
+        oriBoxDisplay.x = this._oriBoxBody.position[0];
+        oriBoxDisplay.y = this._oriBoxBody.position[1];
         //贴图
         this._oriBoxBody.displays = [oriBoxDisplay];
         //处理egret贴图的锚点
@@ -103,6 +106,8 @@ class ClickToShowShape extends BaseClass {
             this.display.width = (<p2.Circle>circleShape).radius * 2;
             this.display.height = (<p2.Circle>circleShape).radius * 2;
         }
+        this.display.x = this.shapeBody.position[0];
+        this.display.y = this.shapeBody.position[1];
         this.display.anchorOffsetX = this.display.width / 2;
         this.display.anchorOffsetY = this.display.height / 2;
         this.shapeBody.displays = [this.display];
