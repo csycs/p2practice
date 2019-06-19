@@ -71,5 +71,14 @@ class Main extends egret.DisplayObjectContainer {
 
         let invertObject = new ButtonControl(InvertObject, 130, "初始世界，重力朝上");
         invertObject.init();
+
+        let invertObjectToDown1 = new ButtonControl(InvertObjectToDown1, 170, "翻转容器，实现物体下落");
+        invertObjectToDown1.init();
+
+        let invertObjectToDown2 = new ButtonControl(InvertObjectToDown2, 210, "屏幕高度-刚体y,实现物体下落");
+        invertObjectToDown2.init();
+
+        let invertObjectToDown3 = new ButtonControl(InvertObjectToDown3, 250, "y值，角度取负，实现物体下落");
+        invertObjectToDown3.init();
     }
 }
