@@ -71,11 +71,8 @@ world.addChild(body)
    1. 使用startTick(心跳)进行处理，函数会一直以60帧的速率运行，修改帧数是对运行速率没有影响的。
    2. 使用enterFrame事件进行处理，该事件会根据实时的帧率进行计算。
 ## 鸣谢 
-```
 项目参考：
 1. egret论坛中的官方教程
 2. 论坛大神的示例 [传送门](https://bbs.egret.com/forum.php?mod=viewthread&tid=15762&highlight=p2)
-如涉及侵权，请及时私信。
-感谢上述大佬们～。～
-```
+3.  ***如涉及侵权，请及时私信。感谢上述大佬们～。～***
 ---
