@@ -129,6 +129,8 @@ var Main = (function (_super) {
         debugDrawTest.init();
         var lineBody = new ButtonControl(LineBody, 90, "线型刚体示例");
         lineBody.init();
+        var invertObject = new ButtonControl(InvertObject, 130, "初始世界，重力朝上");
+        invertObject.init();
     };
     return Main;
 }(egret.DisplayObjectContainer));

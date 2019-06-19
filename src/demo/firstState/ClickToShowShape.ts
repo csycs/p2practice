@@ -2,6 +2,7 @@ class ClickToShowShape extends BaseClass {
     private world: p2.World;
     private planeShape: p2.Plane;
     private planeBody: p2.Body;
+    private factor: number = 50;
 
     public init() {
         this.createWorld();
@@ -9,7 +10,7 @@ class ClickToShowShape extends BaseClass {
         this.createOriBox();
 
         //执行step函数
-        Global.main.addEventListener(egret.Event.ENTER_FRAME, this.update, this);
+        egret.Ticker.getInstance().register(this.update, this);
         //舞台添加点击事件，点击出现物体
         Global.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onButtonClick, this);
     }
@@ -30,7 +31,7 @@ class ClickToShowShape extends BaseClass {
             //刚体类型
             type: p2.Body.STATIC,
             //刚体位置
-            position: [0, Global.stage.stageHeight * 0.9]
+            position: [0, Global.stage.stageHeight * 0.9 / this.factor]
         });
         //egret的坐标轴与p2的坐标轴相反，所以把地面反转180度
         this.planeBody.angle = Math.PI;
@@ -45,11 +46,11 @@ class ClickToShowShape extends BaseClass {
     private _oriBoxBody: p2.Body;
     private createOriBox() {
         //创建box shape
-        let oriBoxShape: p2.Shape = new p2.Box({ width: 140, height: 80 });
+        let oriBoxShape: p2.Shape = new p2.Box({ width: 1.5, height: 1 });
         //创建box 刚体
         this._oriBoxBody = new p2.Body({
             mass: 1,
-            position: [400, 400],
+            position: [Global.stage.stageWidth / 2 / this.factor, Global.stage.stageHeight * 0.3 / this.factor],
             angularVelocity: 1
         });
         //形状加入刚体
@@ -59,8 +60,8 @@ class ClickToShowShape extends BaseClass {
         //给刚体创建贴图
         let oriBoxDisplay = EngineControl.getInstance().createBitmapByName("rect_png");
         //设置贴图宽高与刚体形状一致
-        oriBoxDisplay.width = (<p2.Box>oriBoxShape).width;
-        oriBoxDisplay.height = (<p2.Box>oriBoxShape).height;
+        oriBoxDisplay.width = (<p2.Box>oriBoxShape).width * this.factor;
+        oriBoxDisplay.height = (<p2.Box>oriBoxShape).height * this.factor;
         //位置
         oriBoxDisplay.x = this._oriBoxBody.position[0];
         oriBoxDisplay.y = this._oriBoxBody.position[1];
@@ -80,31 +81,31 @@ class ClickToShowShape extends BaseClass {
         e.stopPropagation();
         if (Math.random() > 0.5) {
             //添加方形刚体
-            var boxShape: p2.Shape = new p2.Box({ width: 140, height: 80 });
+            var boxShape: p2.Shape = new p2.Box({ width: 1.5, height: 1 });
             this.shapeBody = new p2.Body({
                 mass: 1,
                 type: p2.Body.DYNAMIC,
-                position: [e.stageX, e.stageY],
+                position: [e.stageX / this.factor, e.stageY / this.factor],
                 angularVelocity: 1
             });
             this.shapeBody.addShape(boxShape);
             this.world.addBody(this.shapeBody);
             this.display = EngineControl.getInstance().createBitmapByName("rect_png");
-            this.display.width = (<p2.Box>boxShape).width;
-            this.display.height = (<p2.Box>boxShape).height;
+            this.display.width = (<p2.Box>boxShape).width * this.factor;
+            this.display.height = (<p2.Box>boxShape).height * this.factor;
         } else {
             //添加圆形刚体
-            var circleShape: p2.Shape = new p2.Circle({ radius: 60 });
+            var circleShape: p2.Shape = new p2.Circle({ radius: 1 });
             this.shapeBody = new p2.Body({
                 mass: 1,
                 type: p2.Body.DYNAMIC,
-                position: [e.stageX, e.stageY]
+                position: [e.stageX / this.factor, e.stageY / this.factor]
             });
             this.shapeBody.addShape(circleShape);
             this.world.addBody(this.shapeBody);
             this.display = EngineControl.getInstance().createBitmapByName("circle_png");
-            this.display.width = (<p2.Circle>circleShape).radius * 2;
-            this.display.height = (<p2.Circle>circleShape).radius * 2;
+            this.display.width = (<p2.Circle>circleShape).radius * 2 * this.factor;
+            this.display.height = (<p2.Circle>circleShape).radius * 2 * this.factor;
         }
         this.display.x = this.shapeBody.position[0];
         this.display.y = this.shapeBody.position[1];
@@ -115,8 +116,9 @@ class ClickToShowShape extends BaseClass {
     }
 
     //帧事件，步函数
-    private update() {
-        this.world.step(1);
+    private update(dt) {
+        if (dt < 10 || dt > 1000) return;
+        this.world.step(dt / 1000);
         //world中存放有世界里的所有body
         let l = this.world.bodies.length;
         for (let i = 0; i < l; i++) {
@@ -125,8 +127,8 @@ class ClickToShowShape extends BaseClass {
             let box: egret.DisplayObject = boxBody.displays[0];
             if (box) {
                 //将刚体的坐标和角度赋值给显示对象
-                box.x = boxBody.position[0];
-                box.y = boxBody.position[1];
+                box.x = boxBody.position[0] * this.factor;
+                box.y = boxBody.position[1] * this.factor;
                 box.rotation = boxBody.angle * 180 / Math.PI;
                 //如果刚体为睡眠状态，将图片透明度设置为0.5，否则为1
                 if (boxBody.sleepState == p2.Body.SLEEPING) {

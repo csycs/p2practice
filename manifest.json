@@ -18,6 +18,7 @@
 		"bin-debug/LoadingUI.js",
 		"bin-debug/debug/p2DebugDraw.js",
 		"bin-debug/debug/simpleP2DebugDraw.js",
+		"bin-debug/demo/InvertObject.js",
 		"bin-debug/demo/firstState/ClickToShowShape.js",
 		"bin-debug/demo/p2demo/DebugDrawTest.js",
 		"bin-debug/demo/p2demo/LineBody.js"

@@ -14,7 +14,7 @@ class DebugDrawTest extends BaseClass {
         this.createDebug();
 
         //执行step函数
-        Global.main.addEventListener(egret.Event.ENTER_FRAME, this.update, this);
+        egret.Ticker.getInstance().register(this.update, this);
         //舞台添加点击事件，点击出现物体
         Global.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onButtonClick, this);
     }
@@ -39,7 +39,7 @@ class DebugDrawTest extends BaseClass {
     }
 
     private initBox(x, y) {
-        let boxShape: p2.Shape = new p2.Box({ width: 100, height: 50 });
+        let boxShape: p2.Shape = new p2.Box({ width: 100, height: 60 });
         this._boxBody = new p2.Body({
             mass: 1,
             type: p2.Body.DYNAMIC,
@@ -63,9 +63,10 @@ class DebugDrawTest extends BaseClass {
         this.initBox(e.stageX, e.stageY);
     }
 
-    private update() {
+    private update(dt) {
         //step的参数与帧率是对应的，具体的对应关系需要再查一查资料
-        this._world.step(60 / 100);
+        if (dt < 10 || dt > 1000) return;
+        this._world.step(dt / 100);
         this.debugDraw.drawDebug();
     }
 }

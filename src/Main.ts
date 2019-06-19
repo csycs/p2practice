@@ -68,5 +68,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let lineBody = new ButtonControl(LineBody, 90, "线型刚体示例");
         lineBody.init();
+
+        let invertObject = new ButtonControl(InvertObject, 130, "初始世界，重力朝上");
+        invertObject.init();
     }
 }
