@@ -41,9 +41,9 @@ class InvertObjectToDown3 extends BaseClass {
     private onClickHandler(e: egret.TouchEvent) {
         let stageX = Math.floor(e.stageX / this._factor);
 
-        //TODO 对点击的位置进行坐标的处理
+        //TODO 对点击的位置进行坐标的处理 全局坐标 - 点击舞台的坐标
         let stageY = (Global.stage.stageHeight - e.stageY) / this._factor;
-        //TODO 对点击的位置进行坐标的处理
+        //TODO 对点击的位置进行坐标的处理 全局坐标 - 点击舞台的坐标
 
         if (Math.random() > 0.5) {
             let boxShape = new p2.Box({ width: 1.5, height: 1 });

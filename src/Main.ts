@@ -80,5 +80,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let invertObjectToDown3 = new ButtonControl(InvertObjectToDown3, 250, "y值，角度取负，实现物体下落");
         invertObjectToDown3.init();
+
+        let personalDebugDraw = new ButtonControl(PersonalDebugDraw, 290, "自己写的DebugDraw");
+        personalDebugDraw.init();
     }
 }

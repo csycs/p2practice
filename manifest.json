@@ -16,6 +16,7 @@
 		"bin-debug/Global.js",
 		"bin-debug/control/ButtonControl.js",
 		"bin-debug/control/EngineControl.js",
+		"bin-debug/debug/DebugDraw.js",
 		"bin-debug/debug/p2DebugDraw.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/demo/firstState/ClickToShowShape.js",
@@ -24,6 +25,7 @@
 		"bin-debug/demo/p2demo/InvertObjectToDown1.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown2.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown3.js",
-		"bin-debug/demo/p2demo/LineBody.js"
+		"bin-debug/demo/p2demo/LineBody.js",
+		"bin-debug/demo/p2demo/PersonalDebugDraw.js"
 	]
 }
