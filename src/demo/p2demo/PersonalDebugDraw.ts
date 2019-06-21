@@ -2,6 +2,8 @@ class PersonalDebugDraw extends BaseClass {
 
     private _world: p2.World;
     private _planeBody: p2.Body;
+    private _circleBody: p2.Body;
+    private _lineBody: p2.Body;
     constructor() {
         super();
     }
@@ -22,6 +24,7 @@ class PersonalDebugDraw extends BaseClass {
         let planeShape = new p2.Plane();
         this._planeBody = new p2.Body({
             type: p2.Body.STATIC,
+            //TODO 地面的位置，这个问题还需要优化
             position: [0, Global.stage.stageHeight * 0.1]
         });
 
@@ -43,8 +46,36 @@ class PersonalDebugDraw extends BaseClass {
         this._world.addBody(this._boxBody);
     }
 
+    private initCircle(x, y) {
+        let circelShape = new p2.Circle({ redius: 0.7 });
+        this._circleBody = new p2.Body({
+            mass: 1,
+            position: [x, y]
+        });
+        this._circleBody.addShape(circelShape);
+        this._world.addBody(this._circleBody);
+    }
+
+    private initLine(x, y) {
+        let lineShape = new p2.Line({ length: 1.6 });
+        this._lineBody = new p2.Body({
+            mass: 1,
+            angularVelocity: 1,
+            position: [x, y]
+        })
+        this._lineBody.addShape(lineShape);
+        this._world.addBody(this._lineBody);
+    }
+
     private onClickHandler(e: egret.TouchEvent) {
-        this.initBox(e.stageX, Global.stage.stageHeight - e.stageY);
+        //TODO 点击屏幕的位置，这个问题也需要处理
+        if (Math.random() > 0.7) {
+            this.initBox(e.stageX, Global.stage.stageHeight - e.stageY);
+        } else if (Math.random() > 0.3 && Math.random() < 0.7) {
+            this.initLine(e.stageX, Global.stage.stageHeight - e.stageY);
+        } else {
+            this.initCircle(e.stageX, Global.stage.stageHeight - e.stageY);
+        }
     }
 
     private _debugDraw: DebugDraw;
