@@ -127,18 +127,18 @@ class PersonalDebugDraw extends BaseClass {
 
     private onClickHandler(e: egret.TouchEvent) {
         //TODO 点击屏幕的位置，这个问题也需要处理
-        // if (Math.random() <= 0.2) {
-        //     this.initBox(e.stageX, Global.stage.stageHeight - e.stageY);
-        // } else if (Math.random() > 0.2 && Math.random() <= 0.4) {
-        //     this.initLine(e.stageX, Global.stage.stageHeight - e.stageY);
-        // } else if (Math.random() > 0.4 && Math.random() <= 0.6) {
-        //     this.initCircle(e.stageX, Global.stage.stageHeight - e.stageY);
-        // } else if (Math.random() > 0.6 && Math.random() <= 0.8) {
-        //     this.initParticle(e.stageX, Global.stage.stageHeight - e.stageY);
-        // } else if (Math.random() > 0.8) {
-        //     this.initCapsule(e.stageX, Global.stage.stageHeight - e.stageY);
-        // }
-        this.initCapsule(e.stageX, Global.stage.stageHeight - e.stageY);
+        let random = Math.random();
+        if (random <= 0.2) {
+            this.initBox(e.stageX, Global.stage.stageHeight - e.stageY);
+        } else if (random > 0.2 && random <= 0.4) {
+            this.initLine(e.stageX, Global.stage.stageHeight - e.stageY);
+        } else if (random > 0.4 && random <= 0.6) {
+            this.initCircle(e.stageX, Global.stage.stageHeight - e.stageY);
+        } else if (random > 0.6 && random <= 0.8) {
+            this.initParticle(e.stageX, Global.stage.stageHeight - e.stageY);
+        } else if (random > 0.8) {
+            this.initCapsule(e.stageX, Global.stage.stageHeight - e.stageY);
+        }
     }
 
     private _debugDraw: DebugDraw;
