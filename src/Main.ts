@@ -83,5 +83,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let personalDebugDraw = new ButtonControl(PersonalDebugDraw, 290, "自己写的DebugDraw");
         personalDebugDraw.init();
+
+        let mouseJoint = new ButtonControl(MouseJoint, 330, "鼠标拾取刚体");
+        mouseJoint.init();
     }
 }

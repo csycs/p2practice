@@ -26,6 +26,7 @@
 		"bin-debug/demo/p2demo/InvertObjectToDown2.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown3.js",
 		"bin-debug/demo/p2demo/LineBody.js",
+		"bin-debug/demo/p2demo/MouseJoint.js",
 		"bin-debug/demo/p2demo/PersonalDebugDraw.js"
 	]
 }

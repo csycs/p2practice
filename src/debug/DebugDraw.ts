@@ -59,6 +59,8 @@ class DebugDraw {
             this.createParticle(shape, body);
         } else if (shape instanceof p2.Capsule) {
             this.createCapsule(shape, body);
+        } else if (shape instanceof p2.Constraint) {
+            this.createConstraint(shape, body);
         }
     }
 
@@ -140,5 +142,21 @@ class DebugDraw {
         body.position[1] /= this._factor;
         body.displays = [this._shape];
         Global.main.addChild(this._shape);
+    }
+
+    private createConstraint(shape, body) {
+
+    }
+
+    public transform_DisValue_To_P2Value(value) {
+        return value / this._factor;
+    }
+
+    public transform_P2Value_To_DisValue(value) {
+        return value * this._factor;
+    }
+
+    public transform_DisY_ToP2Y(value) {
+        return (Global.stage.stageHeight - value) / this._factor;
     }
 }
