@@ -63,28 +63,22 @@ class Main extends egret.DisplayObjectContainer {
         let clickToShowShape = new ButtonControl(ClickToShowShape, 10, "点击屏幕出现物体");
         clickToShowShape.init();
 
-        let debugDrawTest = new ButtonControl(DebugDrawTest, 50, "DebugDraw的用法");
-        debugDrawTest.init();
-
-        let lineBody = new ButtonControl(LineBody, 90, "线型刚体示例");
-        lineBody.init();
-
-        let invertObject = new ButtonControl(InvertObject, 130, "初始世界，重力朝上");
+        let invertObject = new ButtonControl(InvertObject, 50, "初始世界，重力朝上");
         invertObject.init();
 
-        let invertObjectToDown1 = new ButtonControl(InvertObjectToDown1, 170, "翻转容器，实现物体下落");
+        let invertObjectToDown1 = new ButtonControl(InvertObjectToDown1, 90, "翻转容器，实现物体下落");
         invertObjectToDown1.init();
 
-        let invertObjectToDown2 = new ButtonControl(InvertObjectToDown2, 210, "屏幕高度-刚体y,实现物体下落");
+        let invertObjectToDown2 = new ButtonControl(InvertObjectToDown2, 130, "屏幕高度-刚体y,实现物体下落");
         invertObjectToDown2.init();
 
-        let invertObjectToDown3 = new ButtonControl(InvertObjectToDown3, 250, "y值，角度取负，实现物体下落");
+        let invertObjectToDown3 = new ButtonControl(InvertObjectToDown3, 170, "y值，角度取负，实现物体下落");
         invertObjectToDown3.init();
 
-        let personalDebugDraw = new ButtonControl(PersonalDebugDraw, 290, "自己写的DebugDraw");
+        let personalDebugDraw = new ButtonControl(PersonalDebugDraw, 210, "自己写的DebugDraw");
         personalDebugDraw.init();
 
-        let mouseJoint = new ButtonControl(MouseJoint, 330, "鼠标拾取刚体");
+        let mouseJoint = new ButtonControl(MouseJoint, 250, "鼠标拾取刚体");
         mouseJoint.init();
     }
 }

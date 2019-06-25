@@ -38,7 +38,7 @@ class InvertObjectToDown1 extends BaseClass {
 
     private onClickHandler(e: egret.TouchEvent) {
         let stageX = Math.floor(e.stageX / this._factor);
-        let stageY = Math.floor(e.stageY / this._factor);
+        let stageY = Math.floor((Global.stage.stageHeight - e.stageY) / this._factor);
         if (Math.random() > 0.5) {
         let boxShape = new p2.Box({ width: 1.5, height: 1 });
         this._objectBody = new p2.Body({
