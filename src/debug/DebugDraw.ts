@@ -8,18 +8,14 @@ enum Color {
     PARTICLE = 0x2a5caa,
     CAPSULE = 0x33a3dc
 }
-
 class DebugDraw {
-
     private _world: p2.World;
-    private _shape: egret.Shape;
     private _factor: number = 50;
-    constructor(world, shape) {
+
+    constructor(world) {
         this._world = world;
-        this._shape = shape;
     }
 
-    //渲染函数
     public drawDebug() {
         let bLength = this._world.bodies.length;
         for (let i = 0; i < bLength; i++) {
@@ -32,11 +28,15 @@ class DebugDraw {
 
             let display = body.displays[0];
             if (display) {
-                display.x = body.position[0] * this._factor;
-                //TODO 
                 let shape = body.shapes[0];
-                display.y = Global.stage.stageHeight - body.position[1] * this._factor;
-                display.rotation = 360 - body.angle * 180 / Math.PI;
+                display.x = body.position[0] * this._factor;
+                display.y = body.position[1] * this._factor;
+                if (shape instanceof p2.Plane) {
+                    display.rotation = display.rotation;
+                }
+                else {
+                    display.rotation = body.angle * 180 / Math.PI;
+                }
                 if (body.sleepState === p2.Body.SLEEPING) {
                     display.alpha = 0.5;
                 } else {
@@ -46,117 +46,115 @@ class DebugDraw {
         }
     }
 
+
     private drawShape(shape, body) {
         if (shape instanceof p2.Plane) {
             this.createPlane(shape, body);
         } else if (shape instanceof p2.Box) {
             this.createBox(shape, body);
-        } else if (shape instanceof p2.Circle) {
+        }
+        else if (shape instanceof p2.Circle) {
             this.createCircle(shape, body);
-        } else if (shape instanceof p2.Line) {
-            this.createLine(shape, body);
         } else if (shape instanceof p2.Particle) {
             this.createParticle(shape, body);
-        } else if (shape instanceof p2.Capsule) {
-            this.createCapsule(shape, body);
-        } else if (shape instanceof p2.Constraint) {
-            this.createConstraint(shape, body);
-        }
+        } else if (shape instanceof p2.Line) {
+            this.createLine(shape, body);
+        } 
+        // else if (shape instanceof p2.Capsule) {
+        //     this.createCapsule(shape, body);
+        // }
     }
 
     private createPlane(shape, body) {
-        this._shape = new egret.Shape();
-        this._shape.graphics.beginFill(Color.PLANE, 1);
-        this._shape.graphics.drawRect(0, 0, Global.stage.stageWidth, 20);
-        this._shape.graphics.endFill();
-        body.displays = [this._shape];
-        body.position[0] /= this._factor;
-        body.position[1] /= this._factor;
-        Global.main.addChild(this._shape);
+        let sprite: egret.Sprite = new egret.Sprite();
+        sprite.graphics.clear();
+        sprite.graphics.lineStyle(1, Color.FILL);
+        sprite.graphics.beginFill(Color.PLANE, 1);
+        sprite.graphics.drawRect(0, 0, Global.stage.stageWidth, 75);
+        sprite.graphics.endFill();
+        body.displays = [sprite];
+        sprite.x = body.position[0] * this._factor;
+        sprite.y = body.position[1] * this._factor;
+        Global.main.addChild(sprite);
     }
 
     private createBox(shape, body) {
-        this._shape = new egret.Shape();
-        this._shape.graphics.lineStyle(2, Color.FILL);
-        this._shape.graphics.beginFill(Color.BOX, 1);
-        this._shape.graphics.moveTo(((-shape.width / 2) * this._factor), ((-shape.height / 2) * this._factor));
-        this._shape.graphics.lineTo(((shape.width / 2) * this._factor), ((-shape.height / 2) * this._factor));
-        this._shape.graphics.lineTo(((shape.width / 2) * this._factor), ((shape.height / 2) * this._factor));
-        this._shape.graphics.lineTo(((-shape.width / 2) * this._factor), ((shape.height / 2) * this._factor));
-        this._shape.graphics.lineTo(((-shape.width / 2) * this._factor), ((-shape.height / 2) * this._factor));
-        body.position[0] /= this._factor;
-        body.position[1] /= this._factor;
-        body.displays = [this._shape];
-        Global.main.addChild(this._shape);
+        let sprite: egret.Sprite = new egret.Sprite();
+        sprite.graphics.clear();
+        sprite.graphics.lineStyle(2, Color.FILL);
+        sprite.graphics.beginFill(Color.BOX, 1);
+        sprite.graphics.drawRect(0, 0, shape.width * this._factor, shape.height * this._factor);
+        sprite.graphics.endFill();
+        body.displays = [sprite];
+        sprite.x = body.position[0] * this._factor;
+        sprite.y = body.position[1] * this._factor;
+        sprite.anchorOffsetX = sprite.width / 2;
+        sprite.anchorOffsetY = sprite.height / 2;
+        Global.main.addChild(sprite);
     }
 
     private createCircle(shape, body) {
-        this._shape = new egret.Shape();
-        this._shape.graphics.lineStyle(1, Color.FILL);
-        this._shape.graphics.beginFill(Color.CIRCLE, 1);
-        this._shape.graphics.drawCircle(0, 0, shape.radius * this._factor);
-        this._shape.graphics.endFill();
-        body.position[0] /= this._factor;
-        body.position[1] /= this._factor;
-        body.displays = [this._shape];
-        Global.main.addChild(this._shape);
-    }
-
-    private createLine(shape, body) {
-        this._shape = new egret.Shape();
-        this._shape.graphics.lineStyle(1, Color.LINE);
-        this._shape.graphics.beginFill(Color.LINE, 1);
-        this._shape.graphics.drawRect(0, 0, shape.length * this._factor, 2);
-        this._shape.graphics.endFill();
-        this._shape.anchorOffsetX = this._shape.width / 2;
-        this._shape.anchorOffsetY = this._shape.height / 2;
-        body.position[0] /= this._factor;
-        body.position[1] /= this._factor;
-        body.displays = [this._shape];
-        Global.main.addChild(this._shape);
+        let centerPos: Array<number> = [];
+        body.toWorldFrame(centerPos, [0, 0]);
+        let sprite: egret.Sprite = new egret.Sprite();
+        sprite.graphics.clear();
+        sprite.graphics.lineStyle(2, Color.FILL);
+        sprite.graphics.beginFill(Color.CIRCLE, 1);
+        sprite.graphics.drawCircle(0, 0, shape.radius * this._factor);
+        sprite.graphics.endFill();
+        body.displays = [sprite];
+        sprite.x = body.position[0] * this._factor;
+        sprite.y = body.position[1] * this._factor;
+        Global.main.addChild(sprite);
     }
 
     private createParticle(shape, body) {
-        this._shape = new egret.Shape();
-        this._shape.graphics.lineStyle(1, Color.FILL);
-        this._shape.graphics.beginFill(Color.PARTICLE, 1);
-        this._shape.graphics.drawCircle(0, 0, 2);
-        this._shape.graphics.endFill();
-        body.position[0] /= this._factor;
-        body.position[1] /= this._factor;
-        body.displays = [this._shape];
-        Global.main.addChild(this._shape);
+        let sprite: egret.Sprite = new egret.Sprite();
+        sprite.graphics.lineStyle(1, Color.FILL);
+        sprite.graphics.beginFill(Color.PARTICLE, 1);
+        sprite.graphics.drawCircle(0, 0, 2);
+        sprite.graphics.endFill();
+        body.displays = [sprite];
+        sprite.x = body.position[0] * this._factor;
+        sprite.y = body.position[1] * this._factor;
+        Global.main.addChild(sprite);
+    }
+
+    private createLine(shape, body) {
+        let sprite: egret.Sprite = new egret.Sprite();
+        sprite.graphics.lineStyle(1, Color.FILL);
+        sprite.graphics.beginFill(Color.LINE, 1);
+        sprite.graphics.drawRect(0, 0, shape.length * this._factor, 2);
+        sprite.graphics.endFill();
+        body.displays = [sprite];
+        sprite.x = body.position[0] * this._factor;
+        sprite.y = body.position[1] * this._factor;
+        Global.main.addChild(sprite);
     }
 
     private createCapsule(shape, body) {
-        this._shape = new egret.Shape();
-        this._shape.graphics.lineStyle(1, Color.FILL);
-        this._shape.graphics.beginFill(Color.CAPSULE, 1);
-        this._shape.graphics.drawRect(0, 0, (shape.length - 2 * shape.radius) * this._factor, shape.radius * 2 * this._factor);
-        this._shape.graphics.drawCircle(0, shape.radius * this._factor, shape.radius * this._factor);
-        this._shape.graphics.drawCircle((shape.length - shape.radius * 2) * this._factor, shape.radius * this._factor, shape.radius * this._factor);
-        this._shape.graphics.endFill(); 
-        this._shape.anchorOffsetX = this._shape.width / 2;
-        this._shape.anchorOffsetY = this._shape.height / 2;
-        body.position[0] /= this._factor;
-        body.position[1] /= this._factor;
-        body.displays = [this._shape];
-        Global.main.addChild(this._shape);
+        let sprite: egret.Sprite = new egret.Sprite();
+        sprite.graphics.lineStyle(1, Color.FILL);
+        sprite.graphics.beginFill(Color.CAPSULE, 1);
+        sprite.graphics.drawCircle(0, shape.radius * this._factor, shape.radius * this._factor);
+        sprite.graphics.drawRect(0, 0, (shape.length) * this._factor, shape.radius * 2 * this._factor);
+        sprite.graphics.drawCircle((shape.length) * this._factor, shape.radius * this._factor, shape.radius * this._factor);
+
+        sprite.graphics.endFill();
+        body.displays = [sprite];
+        sprite.x = body.position[0] * this._factor;
+        sprite.y = body.position[1] * this._factor;
+        sprite.anchorOffsetX = sprite.width / 2;
+        sprite.anchorOffsetY = sprite.height / 2;
+        Global.main.addChild(sprite);
     }
 
-    private createConstraint(shape, body) {
-
-    }
-
-    public transform_DisValue_To_P2Value(value) {
+    public transform_disValue_to_p2Value(value) {
         return value / this._factor;
     }
 
-    public transform_P2Value_To_DisValue(value) {
+    public transform_p2Value_to_disValue(value) {
         return value * this._factor;
     }
 
-    public transform_DisY_ToP2Y(value) {
-        return (Global.stage.stageHeight - value) / this._factor;
-    }
 }
