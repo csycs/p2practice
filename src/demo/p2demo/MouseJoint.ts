@@ -17,6 +17,7 @@ class MouseJoint extends BaseClass {
     private createScene() {
         this._world = new p2.World();
         this._world.sleepMode = p2.World.BODY_SLEEPING;
+        this._world.gravity = [0, 9.81];
     }
 
     private _planeBody: p2.Body;
@@ -24,15 +25,16 @@ class MouseJoint extends BaseClass {
         let planeShape: p2.Plane = new p2.Plane();
         this._planeBody = new p2.Body({
             type: p2.Body.STATIC,
-            position: [0, Global.stage.stageHeight * 0.1]
+            position: [0, Global.stage.stageHeight * 0.9]
         });
+        this._planeBody.angle = Math.PI;
         this._planeBody.addShape(planeShape);
         this._world.addBody(this._planeBody);
     }
 
     private _boxBody: p2.Body;
     private initOriginalBox() {
-        let boxShape = new p2.Box({ width: 2, height: 1 });
+        let boxShape = new p2.Box({ width: 100, height: 40 });
         this._boxBody = new p2.Body({
             mass: 1,
             angularVelocity: 1,
@@ -56,15 +58,13 @@ class MouseJoint extends BaseClass {
     private _mouseConstraint: p2.RevoluteConstraint;
     private onTouchBeginHandler(e: egret.TouchEvent) {
         e.stopPropagation();
-        let px = this._debugDraw.transform_DisValue_To_P2Value(e.stageX);
-        let py = this._debugDraw.transform_DisY_ToP2Y(e.stageY);
-        let hitBodies = this._world.hitTest([px, py], this._world.bodies, 5);
+        let hitBodies = this._world.hitTest([e.stageX, e.stageY], this._world.bodies, 5);
 
         if (hitBodies.length) {
             let tempHitBody = hitBodies[0];
-            this._mouseBody.position[0] = px;
-            this._mouseBody.position[1] = py;
-            this._mouseConstraint = new p2.RevoluteConstraint(this._mouseBody, tempHitBody, { worldPivot: [px, py] });
+            this._mouseBody.position[0] = e.stageX;
+            this._mouseBody.position[1] = e.stageY;
+            this._mouseConstraint = new p2.RevoluteConstraint(this._mouseBody, tempHitBody, { worldPivot: [e.stageX, e.stageY] });
             this._mouseConstraint.collideConnected = false;
 
             this._world.addConstraint(this._mouseConstraint);
@@ -74,10 +74,8 @@ class MouseJoint extends BaseClass {
     }
 
     private onTouchMoveHandler(e: egret.TouchEvent) {
-        let px = this._debugDraw.transform_DisValue_To_P2Value(e.stageX);
-        let py = this._debugDraw.transform_DisY_ToP2Y(e.stageY);
-        this._mouseBody.position[0] = px;
-        this._mouseBody.position[1] = py;
+        this._mouseBody.position[0] = e.stageX;
+        this._mouseBody.position[1] = e.stageY;
     }
 
     private onTouchEndHandler(e: egret.TouchEvent) {
@@ -94,14 +92,14 @@ class MouseJoint extends BaseClass {
 
     private _debugDraw: DebugDraw;
     private createDdebugDraw() {
-        let shape = new egret.Shape();
-        this._debugDraw = new DebugDraw(this._world, shape);
+        let sprite = new egret.Sprite();
+        Global.main.addChild(sprite);
+        this._debugDraw = new DebugDraw(this._world, sprite);
     }
 
     private update(dt) {
         if (dt < 10 || dt > 1000) return;
-        this._world.step(dt / 1000);
+        this._world.step(60 / 1000);
         this._debugDraw.drawDebug();
-        this._mouseBody.displays[0].alpha = 0;
     }
 }
