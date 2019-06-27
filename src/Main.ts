@@ -81,7 +81,10 @@ class Main extends egret.DisplayObjectContainer {
         let debugDrawTest = new ButtonControl(DebugDrawTest, 250, "debugDrawTest");
         debugDrawTest.init();
 
-        let mouseJoint = new ButtonControl(MouseJoint, 290, "鼠标拾取刚体");
+        let p2ToWorldFrame = new ButtonControl(P2ToWorldFrame, 290, "p2ToWorldFrame演示");
+        p2ToWorldFrame.init();
+
+        let mouseJoint = new ButtonControl(MouseJoint, 330, "鼠标拾取刚体");
         mouseJoint.init();
     }
 }
