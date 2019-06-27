@@ -1,4 +1,8 @@
-class DebugDrawTest extends BaseClass {
+/**
+ * 基础的一些形状，包括：
+ * 矩形，圆形，线形，粒子，胶囊，地面
+ */
+class BasicalShape extends BaseClass {
     constructor() {
         super();
     }

@@ -78,13 +78,16 @@ class Main extends egret.DisplayObjectContainer {
         let invertObjectToDown4 = new ButtonControl(InvertObjectToDown4, 210, "地板角度取负，实现物体下落");
         invertObjectToDown4.init();
 
-        let debugDrawTest = new ButtonControl(DebugDrawTest, 250, "debugDrawTest");
-        debugDrawTest.init();
+        let basicalShape = new ButtonControl(BasicalShape, 250, "基础形状:圆,矩形,线,粒子,胶囊");
+        basicalShape.init();
 
-        let p2ToWorldFrame = new ButtonControl(P2ToWorldFrame, 290, "p2ToWorldFrame演示");
+        let polygonShape = new ButtonControl(PolygonShape, 290, "特殊形状:凸多边形,凹多边形,特殊地形");
+        polygonShape.init();
+
+        let p2ToWorldFrame = new ButtonControl(P2ToWorldFrame, 330, "p2ToWorldFrame演示");
         p2ToWorldFrame.init();
 
-        let mouseJoint = new ButtonControl(MouseJoint, 330, "鼠标拾取刚体");
+        let mouseJoint = new ButtonControl(MouseJoint, 370, "鼠标拾取刚体");
         mouseJoint.init();
     }
 }
