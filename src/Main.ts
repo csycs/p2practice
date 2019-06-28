@@ -92,5 +92,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let concaveShape = new ButtonControl(ConcaveShape, 410, "通过 fromPolygon 模拟凹多边形");
         concaveShape.init();
+
+        let compoundBody = new ButtonControl(CompoundBody, 450, "模拟复合刚体的实现");
+        compoundBody.init();
     }
 }
