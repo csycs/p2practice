@@ -97,18 +97,6 @@ class PolygonShape extends BaseClass {
         } else {
             this.createConvex_polygon(e.stageX, e.stageY);
         }
-        // this.test(e.stageX, e.stageY)
-    }
-
-    private test(x, y) {
-        let shape = new p2.Circle({ radius: 30 });
-        let shapeBody = new p2.Body({
-            mass: 1,
-            position: [x, y]
-        })
-        shape.material = this._polygonMaterial;
-        shapeBody.addShape(shape);
-        this._world.addBody(shapeBody);
     }
 
     private createDebugDraw() {

@@ -81,7 +81,7 @@ class Main extends egret.DisplayObjectContainer {
         let basicalShape = new ButtonControl(BasicalShape, 250, "基础形状:圆,矩形,线,粒子,胶囊");
         basicalShape.init();
 
-        let polygonShape = new ButtonControl(PolygonShape, 290, "特殊形状:凸多边形,凹多边形,特殊地形");
+        let polygonShape = new ButtonControl(PolygonShape, 290, "特殊形状:凸多边形,特殊地形");
         polygonShape.init();
 
         let p2ToWorldFrame = new ButtonControl(P2ToWorldFrame, 330, "p2ToWorldFrame演示");
@@ -89,5 +89,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let mouseJoint = new ButtonControl(MouseJoint, 370, "鼠标拾取刚体");
         mouseJoint.init();
+
+        let concaveShape = new ButtonControl(ConcaveShape, 410, "通过 fromPolygon 模拟凹多边形");
+        concaveShape.init();
     }
 }
