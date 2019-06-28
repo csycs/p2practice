@@ -37,6 +37,8 @@ class DebugDraw {
                     this.drawParticle(shape, body);
                 } else if (shape instanceof p2.Capsule) {
                     this.drawCapsule(shape, body);
+                } else if (shape instanceof p2.Heightfield) {
+                    this.drawHeightsField(shape, body);
                 }
             }
         }
@@ -129,6 +131,18 @@ class DebugDraw {
         g.lineTo(p1[0], p1[1]);
         g.drawCircle(a1[0], a1[1], shape.radius);
         g.drawCircle(a2[0], a2[1], shape.radius);
+        g.endFill();
+    }
+
+    private drawHeightsField(shape, body) {
+        let heights = shape.heights;
+        let g = this._sprite.graphics;
+        g.lineStyle(1, Color.LINE);
+        g.moveTo(body.position[0], heights[0]);
+        for (let i = 1; i <= heights.length; i++) {
+            let xx = body.position[0] + i * shape.elementWidth;
+            g.lineTo(xx, heights[i]);
+        }
         g.endFill();
     }
 }
