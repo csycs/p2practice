@@ -95,5 +95,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let compoundBody = new ButtonControl(CompoundBody, 450, "模拟复合刚体的实现");
         compoundBody.init();
+
+        let rayCastToBody = new ButtonControl(RayCastToBody, 490, "射线击中刚体的示例");
+        rayCastToBody.init();
     }
 }

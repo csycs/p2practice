@@ -145,4 +145,12 @@ class DebugDraw {
         }
         g.endFill();
     }
+
+    public drawRay(start, end) {
+        let g = this._sprite.graphics;
+        g.lineStyle(2, Color.LINE);
+        g.moveTo(start[0], start[1]);
+        g.lineTo(end[0], end[1]);
+        g.endFill();
+    }
 }
