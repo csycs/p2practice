@@ -1,5 +1,5 @@
 /**
- * 
+ * 将p2物理世界的地面翻转 Math.PI,即180度,实现世界的翻转
  */
 class InvertObjectToDown4 extends BaseClass {
 

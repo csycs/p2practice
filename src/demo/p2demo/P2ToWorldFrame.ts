@@ -1,3 +1,6 @@
+/**
+ * p2刚体的本地坐标向全局坐标的转换
+ */
 class P2ToWorldFrame extends BaseClass {
     constructor() {
         super();

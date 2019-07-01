@@ -1,3 +1,8 @@
+/**
+ * 凹多变形的示例
+ * 在p2中，是没有凹多边形真实存在的
+ * 所以是通过 body 中的 fromPolygon 方法，去规定一组 path 的值，间接实现
+ */
 class ConcaveShape extends BaseClass {
 
     private _world: p2.World;

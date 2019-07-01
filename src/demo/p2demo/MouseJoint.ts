@@ -1,3 +1,9 @@
+/**
+ * 鼠标拾取的示例
+ * 1、判断点击到屏幕的时候，是否点到了刚体
+ * 2、如果有，将提前创建好的移动刚体与点击到的刚体创建联系 RevoluteConstraint
+ * 3、移动提前创建好的刚体，即可实现点击到的刚体的移动
+ */
 class MouseJoint extends BaseClass {
     constructor() {
         super();

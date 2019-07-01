@@ -1,3 +1,6 @@
+/**
+ * 复合刚体的实现
+ */
 class CompoundBody extends BaseClass {
     private _world: p2.World;
     private _planeBody: p2.Body;

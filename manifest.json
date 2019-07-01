@@ -10,7 +10,7 @@
 	],
 	"game": [
 		"bin-debug/base/BaseClass.js",
-		"bin-debug/demo/firstState/ClickToShowShape.js",
+		"bin-debug/demo/p2demo/BasicalShape.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/Global.js",
@@ -20,8 +20,8 @@
 		"bin-debug/debug/DebugDraw.js",
 		"bin-debug/debug/p2DebugDraw.js",
 		"bin-debug/debug/simpleP2DebugDraw.js",
+		"bin-debug/demo/firstState/ClickToShowShape.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/demo/p2demo/BasicalShape.js",
 		"bin-debug/demo/p2demo/CompoundBody.js",
 		"bin-debug/demo/p2demo/ConcaveShape.js",
 		"bin-debug/demo/p2demo/InvertObject.js",
@@ -31,6 +31,7 @@
 		"bin-debug/demo/p2demo/InvertObjectToDown4.js",
 		"bin-debug/demo/p2demo/MouseJoint.js",
 		"bin-debug/demo/p2demo/P2ToWorldFrame.js",
-		"bin-debug/demo/p2demo/PolygonShape.js"
+		"bin-debug/demo/p2demo/PolygonShape.js",
+		"bin-debug/demo/p2demo/RayCastToBody.js"
 	]
 }
