@@ -1,8 +1,8 @@
-class RayCastToBody extends BaseClass {
+class RayReflectBody extends BaseClass {
 
     private _world: p2.World;
     private _planeBody: p2.Body;
-    private _cricleBody: p2.Body;
+    private _boxBody: p2.Body;
     private _debugDraw: DebugDraw;
     constructor() {
         super();
@@ -11,9 +11,9 @@ class RayCastToBody extends BaseClass {
     public init() {
         this.createWorld();
         this.createPlane();
-        this.createCircle();
+        this.createBox();
         this.createRay();
-        this.initMouseControl();
+        this.createMouse();
         this.createDebugDraw();
         egret.Ticker.getInstance().register(this.update, this);
     }
@@ -21,7 +21,7 @@ class RayCastToBody extends BaseClass {
     private createWorld() {
         this._world = new p2.World();
         this._world.sleepMode = p2.World.BODY_SLEEPING;
-        this._world.gravity = [0, 9.81];
+        this._world.gravity = [0, 0];
     }
 
     private createPlane() {
@@ -35,29 +35,28 @@ class RayCastToBody extends BaseClass {
         this._world.addBody(this._planeBody);
     }
 
-    private createCircle() {
-        let circleShape: p2.Circle = new p2.Circle({ radius: 50 });
-        this._cricleBody = new p2.Body({
+    private createBox() {
+        let boxShape: p2.Box = new p2.Box({ width: 50, height: 150 });
+        this._boxBody = new p2.Body({
             mass: 1,
-            type: p2.Body.DYNAMIC,
             position: [Global.stage.stageWidth / 2, Global.stage.stageHeight / 2]
         });
-        this._cricleBody.addShape(circleShape);
-        this._world.addBody(this._cricleBody);
+        this._boxBody.addShape(boxShape);
+        this._world.addBody(this._boxBody);
     }
 
     private _ray: p2.Ray;
+    private _result: p2.RaycastResult;
     private _hitPoint: number[];
-    private _rayCastResult: p2.RaycastResult;
     private createRay() {
         this._ray = new p2.Ray({
             mode: p2.Ray.CLOSEST
         });
+        this._result = new p2.RaycastResult();
         this._hitPoint = p2.vec2.create();
-        this._rayCastResult = new p2.RaycastResult();
     }
 
-    private initMouseControl() {
+    private createMouse() {
         let mouseControl = new MouseControl(this._world);
         mouseControl.startMouseSearch();
     }
@@ -68,25 +67,35 @@ class RayCastToBody extends BaseClass {
         this._debugDraw = new DebugDraw(this._world, sprite);
     }
 
-    private updateRay() {
-        this._ray.from[0] = Global.stage.stageWidth * 0.4;
-        this._ray.from[1] = Global.stage.stageHeight * 0.5;
-        this._ray.to[0] = Global.stage.stageWidth * 0.6;
-        this._ray.to[1] = Global.stage.stageHeight * 0.8;
+    private updateRays() {
+        let hits = 0;
+        this._ray.from[0] = 0;
+        this._ray.from[1] = Global.stage.stageHeight / 2;
+        this._ray.to[0] = Global.stage.stageWidth * 0.8;
+        this._ray.to[1] = Global.stage.stageHeight / 2;
         this._ray.update();
-        if (this._world.raycast(this._rayCastResult, this._ray)) {
-            this._rayCastResult.getHitPoint(this._hitPoint, this._ray);
+        while (this._world.raycast(this._result, this._ray) && hits++ < 5) {
+            this._result.getHitPoint(this._hitPoint, this._ray);
             this._debugDraw.drawRay(this._ray.from, this._hitPoint);
-        } else {
-            this._debugDraw.drawRay(this._ray.from, this._ray.to);
+            p2.vec2.copy(this._ray.from, this._hitPoint);
+            this._ray.update();
+            //反射
+            p2.vec2.reflect(this._ray.direction, this._ray.direction, this._result.normal);
+            this._result.reset();
+
+            //将击中刚体的点的坐标赋值给射线的from，然后再基于法线进行反射，绘制出反射的路径
+            this._ray.from[0] += this._ray.direction[0] * 0.001;
+            this._ray.from[1] += this._ray.direction[1] * 0.001;
+            this._ray.to[0] = this._ray.from[0] + this._ray.direction[0] * 1000;
+            this._ray.to[1] = this._ray.from[1] + this._ray.direction[1] * 1000;
         }
-        this._rayCastResult.reset();
+        this._debugDraw.drawRay(this._ray.from, this._ray.to);
     }
 
     private update(dt) {
         if (dt < 10 || dt > 1000) return;
         this._world.step(dt / 1000);
         this._debugDraw.drawDebug();
-        this.updateRay();
+        this.updateRays();
     }
 }

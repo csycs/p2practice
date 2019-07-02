@@ -32,6 +32,7 @@
 		"bin-debug/demo/p2demo/MouseJoint.js",
 		"bin-debug/demo/p2demo/P2ToWorldFrame.js",
 		"bin-debug/demo/p2demo/PolygonShape.js",
-		"bin-debug/demo/p2demo/RayCastToBody.js"
+		"bin-debug/demo/p2demo/RayCastToBody.js",
+		"bin-debug/demo/p2demo/RayReflectBody.js"
 	]
 }
