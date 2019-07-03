@@ -2,8 +2,8 @@ class RayRefractBody extends BaseClass {
 
     private _world: p2.World;
     private _planeBody: p2.Body;
-    private _boxBody: p2.Body;
-    private _circleBody: p2.Body;
+    private _boxBody1: p2.Body;
+    private _boxBody2: p2.Body;
     private _debugDraw: DebugDraw;
     //空气折射率
     private _airIndex: number = 1;
@@ -16,8 +16,8 @@ class RayRefractBody extends BaseClass {
     public init() {
         this.createWorld();
         this.createPlane();
-        this.createBox();
-        this.createCircle();
+        this.createBox1();
+        this.createBox2();
         this.createRefractRay();
         this.createMouseControl();
         this.createDebugDraw();
@@ -27,7 +27,7 @@ class RayRefractBody extends BaseClass {
     private createWorld() {
         this._world = new p2.World();
         this._world.sleepMode = p2.World.BODY_SLEEPING;
-        this._world.gravity = [0, 9.81];
+        this._world.gravity = [0, 0];
     }
 
     private createPlane() {
@@ -41,24 +41,25 @@ class RayRefractBody extends BaseClass {
         this._world.addBody(this._planeBody);
     }
 
-    private createBox() {
-        let boxShape: p2.Box = new p2.Box({ width: 120, height: 60 });
-        this._boxBody = new p2.Body({
+    private createBox1() {
+        let boxShape: p2.Box = new p2.Box({ width: 60, height: 300 });
+        this._boxBody1 = new p2.Body({
             mass: 1,
-            position: [Global.stage.stageWidth / 2, Global.stage.stageHeight * 0.3]
+            position: [Global.stage.stageWidth / 2, Global.stage.stageHeight * 0.5]
         });
-        this._boxBody.addShape(boxShape);
-        this._world.addBody(this._boxBody);
+        this._boxBody1.angle = -0.5;
+        this._boxBody1.addShape(boxShape);
+        this._world.addBody(this._boxBody1);
     }
 
-    private createCircle() {
-        let circleShape: p2.Circle = new p2.Circle({ radius: 60 });
-        this._circleBody = new p2.Body({
+    private createBox2() {
+        let boxShape: p2.Box = new p2.Box({ width: 300, height: 60 });
+        this._boxBody2 = new p2.Body({
             mass: 1,
-            position: [Global.stage.stageWidth / 2, Global.stage.stageHeight / 2]
+            position: [Global.stage.stageWidth * 0.8, Global.stage.stageHeight * 0.8]
         });
-        this._circleBody.addShape(circleShape);
-        this._world.addBody(this._circleBody);
+        this._boxBody2.addShape(boxShape);
+        this._world.addBody(this._boxBody2);
     }
 
     private createMouseControl() {
