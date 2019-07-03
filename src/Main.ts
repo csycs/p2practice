@@ -101,5 +101,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let rayReflectBody = new ButtonControl(RayReflectBody, 530, "射线击中刚体的反射示例 ");
         rayReflectBody.init();
+
+        let rayRefractBody = new ButtonControl(RayRefractBody, 570, "射线击中刚体的折射示例 ");
+        rayRefractBody.init();
     }
 }
