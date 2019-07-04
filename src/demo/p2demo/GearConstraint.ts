@@ -1,10 +1,4 @@
-/**
- *  距离约束：保持两个刚体之间的距离不变
- *  构造函数的前两个参数为要进行设置的两个刚体
- *  之后可以对两个刚体的目标点进行设置，两个目标点之间的距离即为约束要保持的距离
- *  如果不设置目标点，则目标点默认为两个刚体的锚点
- */
-class DistanceConstraint extends BaseClass {
+class GearConstraint extends BaseClass {
     private _world: p2.World;
     private _planeBody: p2.Body;
     private _boxBody1: p2.Body;
@@ -62,9 +56,12 @@ class DistanceConstraint extends BaseClass {
         this._world.addBody(this._boxBody2);
     }
 
+    private _gearConstraint: p2.GearConstraint;
     private _distanceConstraint: p2.DistanceConstraint;
     private createConstraint() {
-        this._distanceConstraint = new p2.DistanceConstraint(this._boxBody1, this._boxBody2, { distance: 100 });
+        this._gearConstraint = new p2.GearConstraint(this._boxBody1, this._boxBody2, { angle: 0.5 });
+        this._world.addConstraint(this._gearConstraint);
+        this._distanceConstraint = new p2.DistanceConstraint(this._boxBody1, this._boxBody2, { distance: 150 });
         this._world.addConstraint(this._distanceConstraint);
     }
 

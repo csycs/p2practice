@@ -107,5 +107,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let distanceConstraint = new ButtonControl(DistanceConstraint, 610, "距离约束:保持刚体之间的距离不变");
         distanceConstraint.init();
+
+        let gearConstraint = new ButtonControl(GearConstraint, 650, "角度约束:保持刚体之间的角度不变");
+        gearConstraint.init();
     }
 }
