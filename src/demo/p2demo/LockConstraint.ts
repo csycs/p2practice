@@ -1,4 +1,4 @@
-class GearConstraint extends BaseClass {
+class LockConstraint extends BaseClass {
     private _world: p2.World;
     private _planeBody: p2.Body;
     private _boxBody1: p2.Body;
@@ -56,13 +56,10 @@ class GearConstraint extends BaseClass {
         this._world.addBody(this._boxBody2);
     }
 
-    private _gearConstraint: p2.GearConstraint;
-    private _distanceConstraint: p2.DistanceConstraint;
+    private _lockConstraint: p2.LockConstraint;
     private createConstraint() {
-        this._gearConstraint = new p2.GearConstraint(this._boxBody1, this._boxBody2, { angle: 0.5, ratio: 1 });
-        this._world.addConstraint(this._gearConstraint);
-        this._distanceConstraint = new p2.DistanceConstraint(this._boxBody1, this._boxBody2, { distance: 150 });
-        this._world.addConstraint(this._distanceConstraint);
+        this._lockConstraint = new p2.LockConstraint(this._boxBody1, this._boxBody2, { localOffsetB: [0, 100], localAngleB: 0.5 });
+        this._world.addConstraint(this._lockConstraint);
     }
 
     private createMouseControl() {
