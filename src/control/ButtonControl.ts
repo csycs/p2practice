@@ -3,10 +3,12 @@ class ButtonControl {
     private _buttonTip: egret.TextField;
     private _className: any;
     private _tips: string;
+    private _x: any;
     private _y: any;
-    constructor(className, y, tips) {
+    constructor(className, x, y, tips) {
         this._className = className;
         this._tips = tips;
+        this._x = x;
         this._y = y;
     }
 
@@ -15,7 +17,7 @@ class ButtonControl {
         shape.graphics.beginFill(0x705628);
         shape.graphics.drawRect(0, 0, 80, 30);
         shape.graphics.endFill();
-        shape.x = 100;
+        shape.x = this._x;
         shape.y = this._y;
         Global.main.addChild(shape);
         shape.touchEnabled = true;
