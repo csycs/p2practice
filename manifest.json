@@ -24,6 +24,7 @@
 		"bin-debug/demo/p2demo/BasicalShape.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/demo/p2demo/ConcaveShape.js",
+		"bin-debug/demo/p2demo/DistanceConstraint.js",
 		"bin-debug/demo/p2demo/InvertObject.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown1.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown2.js",

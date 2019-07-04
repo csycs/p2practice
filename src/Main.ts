@@ -104,5 +104,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let rayRefractBody = new ButtonControl(RayRefractBody, 570, "射线击中刚体的折射示例 ");
         rayRefractBody.init();
+
+        let distanceConstraint = new ButtonControl(DistanceConstraint, 610, "距离约束:保持刚体之间的距离不变");
+        distanceConstraint.init();
     }
 }
