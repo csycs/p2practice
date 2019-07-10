@@ -10,7 +10,7 @@
 	],
 	"game": [
 		"bin-debug/base/BaseClass.js",
-		"bin-debug/demo/p2demo/ConcaveShape.js",
+		"bin-debug/demo/p2demo/GearConstraint.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/Global.js",
@@ -23,19 +23,23 @@
 		"bin-debug/demo/firstState/ClickToShowShape.js",
 		"bin-debug/demo/p2demo/BasicalShape.js",
 		"bin-debug/demo/p2demo/CompoundBody.js",
-		"bin-debug/LoadingUI.js",
+		"bin-debug/demo/p2demo/ConcaveShape.js",
 		"bin-debug/demo/p2demo/DistanceConstraint.js",
-		"bin-debug/demo/p2demo/GearConstraint.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/demo/p2demo/InvertObject.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown1.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown2.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown3.js",
 		"bin-debug/demo/p2demo/InvertObjectToDown4.js",
+		"bin-debug/demo/p2demo/LockConstraint.js",
 		"bin-debug/demo/p2demo/MouseJoint.js",
 		"bin-debug/demo/p2demo/P2ToWorldFrame.js",
 		"bin-debug/demo/p2demo/PolygonShape.js",
+		"bin-debug/demo/p2demo/PrismaticConstraint.js",
 		"bin-debug/demo/p2demo/RayCastToBody.js",
 		"bin-debug/demo/p2demo/RayReflectBody.js",
-		"bin-debug/demo/p2demo/RayRefractBody.js"
+		"bin-debug/demo/p2demo/RayRefractBody.js",
+		"bin-debug/demo/p2demo/RevoluteConstraint.js",
+		"bin-debug/demo/p2demo/WheelConstraint.js"
 	]
 }

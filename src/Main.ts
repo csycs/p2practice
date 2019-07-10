@@ -113,5 +113,14 @@ class Main extends egret.DisplayObjectContainer {
 
         let lockConstraint = new ButtonControl(LockConstraint, 260, 10, "位置旋转约束");
         lockConstraint.init();
+
+        let prismaticConstraint = new ButtonControl(PrismaticConstraint, 260, 50, "滑块约束");
+        prismaticConstraint.init();
+
+        let revoluteConstraint = new ButtonControl(RevoluteConstraint, 260, 90, "旋转偏移约束");
+        revoluteConstraint.init();
+
+        let wheelConstraint = new ButtonControl(WheelConstraint, 260, 130, "WheelConstraint");
+        wheelConstraint.init();
     }
 }
