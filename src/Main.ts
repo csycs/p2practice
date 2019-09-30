@@ -122,5 +122,8 @@ class Main extends egret.DisplayObjectContainer {
 
         let wheelConstraint = new ButtonControl(WheelConstraint, 260, 130, "WheelConstraint");
         wheelConstraint.init();
+
+        let buoyancy = new ButtonControl(Buoyancy, 260, 170, "浮力示例");
+        buoyancy.init();
     }
 }
