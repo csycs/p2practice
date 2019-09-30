@@ -37,11 +37,30 @@ class EngineControl extends BaseClass {
         return box;
     }
 
+    /**
+     * 绘制圆形刚体的形状
+     */
     public drawCircle(color, radius) {
         let circle: egret.Shape = new egret.Shape();
         circle.graphics.beginFill(color);
         circle.graphics.drawCircle(0, 0, radius);
         circle.graphics.endFill();
         return circle;
+    }
+
+    /**
+     * 通过类名获取元素
+     * @param ClassName 
+     */
+    public getElementByClassName(ClassName) {
+        let baseContainer: egret.DisplayObjectContainer = Global.main;
+        let list = [];
+        for (let i = 0; i < baseContainer.numChildren; i++) {
+            let element = baseContainer.getChildAt(i);
+            if (element instanceof ClassName) {
+                list.push(element);
+            }
+        }
+        return list;
     }
 }

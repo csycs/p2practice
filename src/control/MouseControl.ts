@@ -29,6 +29,7 @@ class MouseControl extends BaseClass {
         let mouseShape: p2.Box = new p2.Box();
         this._mouseBody = new p2.Body({});
         this._mouseBody.addShape(mouseShape);
+        this._mouseBody.displays = [];
         this._world.addBody(this._mouseBody);
     }
 
